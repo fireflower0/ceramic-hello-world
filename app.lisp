@@ -16,6 +16,7 @@
   (templates #p"templates/"))
 
 ;; Define an application
+
 (defapp app
     :middlewares ((clack.middleware.static:<clack-middleware-static>
                    :root (ceramic:resource-directory 'assets)
@@ -24,13 +25,14 @@
 ;; Djula Config
 
 (djula:add-template-directory (asdf:system-relative-pathname :ceramic-hello-world "templates/"))
-(defparameter *base.html*  (djula:compile-template* "base.html"))
-(defparameter *index.html* (djula:compile-template* "index.html"))
+
+(defun djula-render (template-path &optional env)
+  (djula:render-template* (djula:compile-template* template-path) nil env))
 
 ;; Route requests to "/" to this function
 @route app "/"
 (defview hello ()
-  (respond (djula:render-template* *index.html*)))
+  (respond (djula-render "index.html")))
 
 ;; Ceramic Run
 

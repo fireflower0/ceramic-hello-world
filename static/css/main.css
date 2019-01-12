@@ -1,15 +1,356 @@
-h1{
-    color: #505050;                   /* 文字色         */
-    padding: 0.5em;                   /* 文字周りの余白 */
-    display: inline-block;            /* おまじない     */
-    line-height: 1.3;                 /* 行高           */
-    background: #dbebf8;              /* 背景色         */
-    vertical-align: middle;           /* 上下中央       */
-    border-radius: 25px 0px 0px 25px; /*左側の角を丸く*/
+*, *:before, *:after {
+	border: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+:root {
+	--dur: 1s;
+}
+body {
+	font: 24px "Helvetica Neue", Helvetica, sans-serif;
+	line-height: 1;
+}
+main {
+	margin: 3em auto 0;
+	width: 20.5em;
+}
+div, span {
+    /*     outline: 1px solid red; */
+}
+div {
+	margin-bottom: 2em;
+}
+span {
+	display: inline-block;
 }
 
-h1:before {
-    content: '●';
-    color: white;
-    margin-right: 8px;
+/* Emoticon parts */
+.a-arm {
+	animation: a-armMove var(--dur) linear infinite;
+	transform-origin: 25% 25%;
+}
+.a-trajectory {
+	animation: a-trajectory var(--dur) linear infinite;
+}
+.a-table {
+	animation: a-tableFlip var(--dur) linear infinite;
+	transform-origin: -33% 50%;
+}
+.b-arm {
+	animation: b-armMove var(--dur) linear infinite;
+	transform-origin: 25% 25%;
+}
+.b-belt, .b-belt:before {
+	background: repeating-linear-gradient(90deg,transparent,transparent 0.25em,currentColor 0.25em,currentColor 3.3em) 0 0 / 100% 0.1em repeat-x;
+}
+.b-belt {
+	animation: b-beltL var(--dur) linear infinite;
+	position: relative;
+	width: 13.2em;
+	height: 0.8em;
+	vertical-align: middle;
+}
+.b-realbelt {
+	color: transparent;
+}
+.b-belt:before {
+	animation: b-beltR var(--dur) linear infinite;
+	background-position: 0 100%;
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.b-table:nth-of-type(3) {
+	animation: b-tableFlip var(--dur) linear infinite;
+}
+.b-table:nth-of-type(n + 4) {
+	animation: b-tableMove var(--dur) linear infinite;
+}
+.b-wheel {
+	animation: b-rotate var(--dur) linear infinite;
+	transform-origin: 50% 60%;
+}
+.c-person {
+	animation: c-rage var(--dur) linear infinite
+}
+.c-table {
+	animation: c-tableSpin var(--dur) linear infinite;
+	transform-origin: 50% 33%;
+}
+.d-arm {
+	animation: d-armMove var(--dur) linear infinite;
+	transform-origin: 100% 50%;
+}
+.d-face {
+	animation: d-faceMove var(--dur) linear infinite;
+}
+.d-table {
+	animation: d-putTableBack var(--dur) linear infinite;
+}
+.e-arm {
+	animation: e-armMove var(--dur) linear infinite;
+	transform-origin: 25% 75%;
+}
+.e-trajectory1 {
+	animation: e-traj1FadeIn var(--dur) linear infinite;
+}
+.e-trajectory2 {
+	animation: e-traj2FadeIn var(--dur) linear infinite;
+}
+.e-trajectory3 {
+	animation: e-traj3FadeIn var(--dur) linear infinite;
+}
+.e-table {
+	animation: e-tableFly var(--dur) linear infinite;
+}
+.f-r_table {
+	animation: f-tableFlipRight var(--dur) linear infinite;
+	transform-origin: 125% 50%;
+}
+.f-l_table {
+	animation: f-tableFlipLeft var(--dur) linear infinite;
+	transform-origin: -25% 50%;
+}
+.f-trajectory {
+	animation: f-trajectory var(--dur) linear infinite;
+}
+.f-arm {
+	animation: f-armMove var(--dur) linear infinite;
+	transform-origin: 50% 100%;
+}
+.g-arm {
+	animation: g-armMove var(--dur) linear infinite;
+	transform-origin: 0% 100%;
+}
+.g-trajectory {
+	animation: g-trajectory var(--dur) linear infinite;
+}
+.g-table {
+	animation: g-tableFloatFlip var(--dur) linear infinite;
+}
+.h-arm {
+	animation: h-armMove var(--dur) ease-out infinite;
+	transform-origin: 0% 100%;
+}
+.h-person, .h-face {
+	animation: h-crouch var(--dur) ease-out infinite;
+}
+.h-board {
+	animation: h-boardFlip var(--dur) linear infinite;
+	transform-origin: 100% 100%;
+}
+.h-marble1 {
+	animation: h-marble1Fly var(--dur) linear infinite;
+}
+.h-marble2 {
+	animation: h-marble2Roll var(--dur) linear infinite;
+}
+.h-marble3 {
+	animation: h-marble3Roll var(--dur) linear infinite;
+}
+.i-t_arm {
+	animation: i-tableArmMove var(--dur) linear infinite;
+	transform-origin: 0% 100%;
+}
+.i-trajectory {
+	animation: i-trajectory var(--dur) linear infinite;
+}
+.i-person {
+	animation: i-personFlip var(--dur) linear infinite;
+	transform-origin: -25% 50%;
+}
+.i-face {
+	animation: i-faceJerk var(--dur) linear infinite;
+}
+.i-arm {
+	animation: i-armMove var(--dur) linear infinite;
+	transform-origin: 0% 0%;
+}
+
+/* Animations */
+@keyframes a-armMove {
+	from {transform: rotate(90deg)}
+	12.5%, to {transform: rotate(0deg)}
+}
+@keyframes a-trajectory {
+	from {opacity: 0}
+	37.5%, to {opacity: 1}
+}
+@keyframes a-tableFlip {
+	from {transform: rotate(-180deg)}
+	37.5%, to {transform: rotate(0)}
+}
+@keyframes b-armMove {
+	from, to {transform: rotate(90deg)}
+	10%, 80% {transform: rotate(0deg)}
+}
+@keyframes b-beltL {
+	from {background-position: 0 0}
+	to {background-position: -3.3em 0}
+}
+@keyframes b-beltR {
+	from {background-position: 0 100%}
+	to {background-position: 3.3em 100%}
+}
+@keyframes b-rotate {
+	from {transform: rotate(0)}
+	to {transform: rotate(-1turn)}
+}
+@keyframes b-tableFlip {
+	from {transform: translate(0) rotate(0)}
+	12.5% {transform: translate(0.5em,-2em) rotate(45deg)}
+	25% {transform: translate(2em,-3.5em) rotate(90deg)}
+	37.5% {transform: translate(3.25em,-4em) rotate(135deg)}
+	50% {transform: translate(4.5em,-4em) rotate(180deg)}
+	62.5% {transform: translate(5.75em,-4em) rotate(225deg)}
+	87.5% {transform: translate(8.75em,-2em) rotate(315deg)}
+	to {transform: translate(9.85em,0) rotate(360deg)}
+}
+@keyframes b-tableMove {
+	from {transform: translateX(0)}
+	to {transform: translateX(-3.3em)}
+}
+@keyframes c-rage {
+	from,10%,20%,30%,40%,50%,60%,70%,80%,90%,to{transform: translateX(0)}
+	5%,15%,25%,35%,45%,55%,65%,75%,85%,95%{transform: translateX(-5%)}
+}
+@keyframes c-tableSpin {
+	from {transform: rotate(0)}
+	to {transform: rotate(2turn)}
+}
+@keyframes d-armMove {
+	from {transform: scaleX(-1)}
+	50%, to {transform: scaleX(1)}
+}
+@keyframes d-faceMove {
+	from {transform: translateX(1em)}
+	50%, to {transform: translateX(0)}
+}
+@keyframes d-putTableBack {
+	from {transform: translateX(7.5em) rotate(180deg)}
+	50%, to {transform: translateX(0) rotate(0)}
+}
+@keyframes e-armMove {
+	from {transform: rotate(90deg)}
+	10%, to {transform: rotate(0deg)}
+}
+@keyframes e-traj1FadeIn {
+	from, 60% {opacity: 0}
+	70%, to {opacity: 1}
+}
+@keyframes e-traj2FadeIn {
+	from, 70% {opacity: 0}
+	80%, to {opacity: 1}
+}
+@keyframes e-traj3FadeIn {
+	from, 80% {opacity: 0}
+	90%, to {opacity: 1}
+}
+@keyframes e-tableFly {
+	from, 6% {transform: translateX(-5em) rotate(-2.75turn)}
+	to {transform: translateX(0) rotate(0)}
+}
+@keyframes f-tableFlipRight {
+	from, 23% {transform: rotate(180deg)}
+	80%, to {transform: rotate(0)}
+}
+@keyframes f-tableFlipLeft {
+	from, 23% {transform: rotate(-180deg)}
+	80%, to {transform: rotate(0)}
+}
+@keyframes f-trajectory {
+	from, 33% {opacity: 0}
+	80%, to {opacity: 1}
+}
+@keyframes f-armMove {
+	from {transform: scaleY(-1)}
+	33%, to {transform: scaleY(1)}
+}
+@keyframes g-armMove {
+	from {transform: scaleY(0.1)}
+	33%, 50% {transform: scaleY(1)}
+	57% {transform: scaleY(1.3)}
+	65%, to {transform: scaleY(1)}
+}
+@keyframes g-trajectory {
+	from, 33% {opacity: 0}
+	50%, to {opacity: 1}
+}
+@keyframes g-tableFloatFlip {
+	from {transform: translate(-4.5em,0.2em) rotate(180deg)}
+	33%, 50% {transform: translate(0) rotate(180deg)}
+	65% {transform: rotate(-20deg)}
+	75% {transform: rotate(10deg)}
+	80%, to {transform: rotate(0)}
+}
+@keyframes h-armMove {
+	from {transform: translateY(0) rotate(45deg)}
+	35%, 45% {transform: translateY(0.2em) rotate(90deg)}
+	55%, to {transform: translateY(0) rotate(0)}
+}
+@keyframes h-crouch {
+	from {transform: translateY(0)}
+	35%, 45% {transform: translateY(0.2em)}
+	55%, to {transform: translateY(0)}
+}
+@keyframes h-boardFlip {
+	from, 48% {transform: translateX(-2em) rotate(-50deg)}
+	to {transform: translateX(0) rotate(0)}
+}
+@keyframes h-marble1Fly {
+	from, 48% {transform: translate(-2.8em,0.1em)}
+	to {transform: translate(0)}
+}
+@keyframes h-marble2Roll {
+	from, 48% {transform: translate(-4em,0.8em)}
+	to {transform: translate(0)}
+}
+@keyframes h-marble3Roll {
+	from, 48% {transform: translate(-4.5em,0.1em)}
+	to {transform: translate(0)}
+}
+@keyframes i-tableArmMove {
+	from {opacity: 0; transform: rotate(75deg)}
+	25%, to {opacity: 1; transform: rotate(0)}
+}
+@keyframes i-trajectory {
+	from, 33% {opacity: 0}
+	80%, to {opacity: 1}
+}
+@keyframes i-armMove {
+	from {transform: rotate(-75deg)}
+	50%, 70% {transform: rotate(0)}
+	75% {transform: rotate(15deg)}
+	80% {transform: rotate(-7deg)}
+	85%, to {transform: rotate(0)}
+}
+@keyframes i-personFlip {
+	from {transform: rotate(-180deg)}
+	70%, to {transform: rotate(0)}
+}
+@keyframes i-faceJerk {
+	from, 70% {transform: translateY(0)}
+	75% {transform: translateY(0.1em)}
+	80%, to {transform: translateY(0)}
+}
+
+/* Twitter */
+.twttr {
+	background: url(https://i.postimg.cc/KvwG6cwt/twitter-icon.png) 0 0 / 100% 100%;
+	font-size: 16px;
+	display: block;
+	opacity: 0.5;
+	position: fixed;
+	bottom: 0.75em;
+	right: 0.75em;
+	width: 1.5em;
+	height: 1.5em;
+}
+.twttr:hover {
+	opacity: 0.9;
 }
